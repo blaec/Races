@@ -44,9 +44,10 @@ namespace LabRaces
         public bool PlaceBet(int BetAmount, int DogToWin)
         {
             bool result = false;
-            if (Cash >= BetAmount)
+            int newBalance = Cash + MyBet.Amount - BetAmount;
+            if (newBalance >= 0)
             {
-                Cash += (MyBet.Amount - BetAmount);
+                Cash = newBalance;
                 MyBet = new Bet() { Amount = BetAmount, Dog = DogToWin };
                 UpdateLabels();
                 result = true;
