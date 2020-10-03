@@ -67,14 +67,33 @@ namespace LabRaces
         private void button1_Click(object sender, EventArgs e)
         {
             bettingParlor.Enabled = false;
-            Thread.Sleep(1000);
-            int winner = random.Next(1, 4);
+            int winner = 0;
+            while (true)
+            {
+                bool hasWinner = false;
+                for (int i = 0; i < dogs.Length; i++)
+                {
+                    if (dogs[i].Run() && !hasWinner)
+                    {
+                        hasWinner = true;
+                        winner = i + 1;
+                    }
+                }
+                if (hasWinner)
+                {
+                    break;
+                }
+            }
             Utils.showMessage($"Won dog #{winner}");
             for (int i = 0; i < guys.Length; i++)
             {
                 guys[i].Collect(guys[i].MyBet.PayOut(winner));
             }
             bettingParlor.Enabled = true;
+            for (int i = 0; i < dogs.Length; i++)
+            {
+                dogs[i].TakeStartingPosition();
+            }
         }
 
         private void placeBet_Click(object sender, EventArgs e)

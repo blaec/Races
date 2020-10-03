@@ -21,7 +21,9 @@ namespace LabRaces
         /// <returns>Return true if I won the race</returns>
         public bool Run()
         {
-            return false;
+            int step = Randomizer.Next(1, 4);
+            MyPictureBox.Left += step;
+            return RacetackiLength <= MyPictureBox.Left;
         }
 
         /// <summary>
@@ -29,7 +31,7 @@ namespace LabRaces
         /// </summary>
         public void TakeStartingPosition()
         {
-
+            MyPictureBox.Left = 0;
         }
     }
 }
