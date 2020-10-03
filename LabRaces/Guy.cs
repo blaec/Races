@@ -22,11 +22,9 @@ namespace LabRaces
         public void UpdateLabels()
         {
             myRadioButton.Text = $"{Name} has {Cash} bucks";
-            if (MyBet.Bettor == null)
-            {
-                MyBet.Bettor = this;
-            }
-            MyLabel.Text = MyBet.GetDescription();
+            MyLabel.Text = MyBet.Amount == 0
+                ? ($"{Name} hasn't placed a bet")
+                : ($"{Name} bets {MyBet.Amount} on dog #{MyBet.Dog}");
         }
 
         /// <summary>
@@ -46,12 +44,10 @@ namespace LabRaces
         public bool PlaceBet(int BetAmount, int DogToWin)
         {
             bool result = false;
-            Cash += MyBet.Amount;
             if (Cash >= BetAmount)
-            { 
-                ClearBet();
-                MyBet = new Bet() { Amount = BetAmount, Dog = DogToWin, Bettor = this };
-                Cash -= BetAmount;
+            {
+                Cash += (MyBet.Amount - BetAmount);
+                MyBet = new Bet() { Amount = BetAmount, Dog = DogToWin };
                 UpdateLabels();
                 result = true;
             }

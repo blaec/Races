@@ -13,10 +13,11 @@ namespace LabRaces
 {
     public partial class Form1 : Form
     {
-        Guy[] guys;
-        Greyhound[] dogs;
-        Random random = new Random();
-        Guy selectedBettor = null;
+        private readonly Guy[] guys;
+        private readonly Greyhound[] dogs;
+        private readonly Random random = new Random();
+        private Guy selectedBettor = null;
+
         public Form1()
         {
             InitializeComponent();
@@ -24,11 +25,12 @@ namespace LabRaces
             // init guys
             guys = new Guy[3];
             guys[0] = new Guy() { Name = "Joe", Cash = 50, MyBet = new Bet(), MyLabel = joeBetLabel, myRadioButton = joeRadioButton };
-            guys[0].UpdateLabels();
             guys[1] = new Guy() { Name = "Bob", Cash = 75, MyBet = new Bet(), MyLabel = bobBetLabel, myRadioButton = bobRadioButton };
-            guys[1].UpdateLabels();
             guys[2] = new Guy() { Name = "Al", Cash = 45, MyBet = new Bet(), MyLabel = alBetLabel, myRadioButton = alRadioButton };
-            guys[2].UpdateLabels();
+            for (int i = 0; i < guys.Length; i++)
+            {
+                guys[i].UpdateLabels();
+            }
 
             // init dogs
             dogs = new Greyhound[4];
