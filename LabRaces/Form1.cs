@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace LabRaces
 {
@@ -64,6 +65,14 @@ namespace LabRaces
         private void button1_Click(object sender, EventArgs e)
         {
             bettingParlor.Enabled = false;
+            Thread.Sleep(1000);
+            int winner = random.Next(1, 4);
+            Utils.showMessage($"Won dog #{winner}");
+            for (int i = 0; i < guys.Length; i++)
+            {
+                guys[i].Collect(guys[i].MyBet.PayOut(winner));
+            }
+            bettingParlor.Enabled = true;
         }
 
         private void placeBet_Click(object sender, EventArgs e)

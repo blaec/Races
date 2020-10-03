@@ -34,7 +34,6 @@ namespace LabRaces
         /// </summary>
         public void ClearBet()
         {
-            Cash += MyBet.Amount;
             MyBet = new Bet();
         }
 
@@ -47,6 +46,7 @@ namespace LabRaces
         public bool PlaceBet(int BetAmount, int DogToWin)
         {
             bool result = false;
+            Cash += MyBet.Amount;
             if (Cash >= BetAmount)
             { 
                 ClearBet();
@@ -61,10 +61,12 @@ namespace LabRaces
         /// <summary>
         /// Ask my bet to pay out, clear my bet, and update my labels
         /// </summary>
-        /// <param name="Winner"></param>
-        public void Collect(int Winner)
+        /// <param name="PrizeAmount"></param>
+        public void Collect(int PrizeAmount)
         {
-
+            Cash += PrizeAmount;
+            ClearBet();
+            UpdateLabels();
         }
     }
 }

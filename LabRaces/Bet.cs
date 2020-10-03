@@ -39,7 +39,7 @@ namespace LabRaces
         /// <returns></returns>
         public int PayOut(int Winner)
         {
-            return 0;
+            return Amount * (Dog == Winner ? 2 : 0);
         }
     }
 }
