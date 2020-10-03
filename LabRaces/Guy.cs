@@ -16,12 +16,17 @@ namespace LabRaces
         public Label MyLabel;                   // My Label
 
         /// <summary>
-        /// Set my label to my bet's description, and tthe label on my
+        /// Set my label to my bet's description, and the label on my
         /// radio button to show my cash ("Joe has 43 bucks")
         /// </summary>
         public void UpdateLabels()
         {
-
+            myRadioButton.Text = $"{Name} has {Cash} bucks";
+            if (MyBet.Bettor == null)
+            {
+                MyBet.Bettor = this;
+            }
+            MyLabel.Text = MyBet.GetDescription();
         }
 
         /// <summary>
@@ -29,7 +34,7 @@ namespace LabRaces
         /// </summary>
         public void ClearBet()
         {
-
+            MyBet = null;
         }
 
         /// <summary>
@@ -40,8 +45,15 @@ namespace LabRaces
         /// <returns>Return true if the guy had enough oney to bet</returns>
         public bool PlaceBet(int BetAmount, int DogToWin)
         {
-            // MyBet = new Bet() { Amount = BetAmount, Dog = DogToWin, Bettor = this };
-            return false;
+            bool result = false;
+            if (Cash >= BetAmount)
+            {
+                MyBet = new Bet() { Amount = BetAmount, Dog = DogToWin, Bettor = this };
+                Cash -= BetAmount;
+                UpdateLabels();
+                result = true;
+            }
+            return result;
         }
 
         /// <summary>

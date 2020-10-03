@@ -19,7 +19,16 @@ namespace LabRaces
         /// <returns></returns>
         public string GetDescription()
         {
-            return null;
+            string description = null;
+            if (Amount == 0)
+            {
+                description = ($"{Bettor.Name} hasn't placed a bet");
+            }
+            else
+            {
+                description = ($"{Bettor.Name} bets {Amount} on dog #{Dog}");
+            }
+            return description;
         }
 
         /// <summary>
