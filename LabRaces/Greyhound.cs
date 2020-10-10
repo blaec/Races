@@ -21,6 +21,8 @@ namespace LabRaces
         /// <returns>Return true if I won the race</returns>
         public bool Run()
         {
+            Application.DoEvents();
+
             int step = Randomizer.Next(1, 4);
             MyPictureBox.Left += step;
             return RacetackiLength <= MyPictureBox.Left;
